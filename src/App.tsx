@@ -44,16 +44,12 @@ function OfficeScene({
     <main className="app-shell">
       <div className="ambient ambient-one" /><div className="ambient ambient-two" />
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="桌邊小鼠首頁"><span className="brand-mark">✿</span><span>桌邊小鼠</span></a>
-        <div className="top-note"><span className="status-dot" /> 辦公室休息時間</div>
-        <div className="top-actions"><span className="tiny-chip">DESK BREAK</span><span className="avatar">M</span></div>
+        <a className="brand" href="#top" aria-label="史萊姆的第八個家首頁"><span className="brand-mark">✿</span><span>史萊姆的第八個家</span></a>
       </header>
 
       <section className="game-layout" id="top">
         <div className="intro-column">
-          <div className="eyebrow"><span className="eyebrow-line" /> 午後小小放風</div>
-          <h1>桌邊小鼠<span>出沒中！</span></h1>
-          <p className="intro-copy">文件先放一邊，來玩一局再回去工作吧。<br />盯緊桌面，別讓小傢伙溜走！</p>
+          <h1>史萊姆的<span>第八個家</span></h1>
 
           <div className="score-card">
             <div className="score-label">本局得分 <span className="sparkle">✦</span></div>
@@ -63,12 +59,11 @@ function OfficeScene({
             <div className="miss-pips" aria-label={`失誤 ${misses} 次，共 ${MAX_MISSES} 次`}>{Array.from({ length: MAX_MISSES }, (_, i) => <span key={i} className={i < misses ? 'pip pip-filled' : 'pip'} />)}</div>
           </div>
 
-          <div className="howto"><span className="howto-icon">⌖</span><div><strong>怎麼玩</strong><p>點擊探頭的小鼠得分<br />點空桌扣分；小鼠縮回不算失誤</p></div></div>
-          <div className="keyboard-note"><span>✦</span> 不限時間，三次失誤就結束</div>
+          <div className="howto"><span className="howto-icon">⌖</span><div><strong>怎麼玩</strong><p>點擊探頭的地鼠得 1 分<br />點空桌扣 1 分；自然縮回不算失誤</p></div></div>
+          <div className="keyboard-note"><span>✦</span> 不限時間，失誤 3 次結束</div>
         </div>
 
         <div className="scene-column">
-          <div className="scene-label"><span className="scene-label-icon">☀</span><span>MY LITTLE OFFICE</span><span className="scene-label-dots">•••</span></div>
           <div
             className="office-scene"
             onClick={(event) => {
@@ -86,9 +81,6 @@ function OfficeScene({
             <div className="wall">
               <div className="wall-shelf"><span className="shelf-book book-one" /><span className="shelf-book book-two" /><span className="shelf-book book-three" /><span className="shelf-plant">♧</span></div>
               <div className="window"><div className="window-sky"><span className="cloud cloud-one" /><span className="cloud cloud-two" /><span className="sun" /><span className="far-building building-one" /><span className="far-building building-two" /><span className="far-building building-three" /><span className="window-mullion" /></div><div className="window-sill" /></div>
-              <div className="pinned-note note-one">今天也要<br />好好休息！<span>♡</span></div>
-              <div className="pinned-note note-two"><span className="note-check">✓</span><br />記得喝水</div>
-              <div className="wall-clock"><span>10</span><i>•</i><b>2</b></div>
             </div>
               <div className="plant plant-left"><span className="plant-leaves">♣</span><span className="plant-pot" /></div>
               <div className="desk-lamp"><span className="lamp-shade" /><span className="lamp-neck" /><span className="lamp-base" /></div>
@@ -97,23 +89,19 @@ function OfficeScene({
               <div className="desk-edge"><div className="desk-top" /><div className="desk-front"><span className="drawer" /><span className="drawer-handle" /><span className="desk-leg leg-left" /><span className="desk-leg leg-right" /></div></div>
               <div className="keyboard"><div className="key-row">▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦</div><div className="keyboard-rgb" /></div>
               <div className="mouse"><span className="mouse-wheel" /><span className="mouse-rgb" /></div>
-              <div className="paper-stack"><i /><i /><i /><span>TO-DO</span></div>
-              <div className="desk-calendar"><span>OCT</span><b>19</b><i>MON</i></div>
+              <div className="paper-stack"><i /><i /><i /></div>
               <div className="desk-mat" />
 
-      <div className="holes-grid" aria-label="打地鼠遊戲區">
+              <div className="holes-grid" aria-label="地鼠遊戲區">
                 {Array.from({ length: HOLE_COUNT }, (_, index) => <div className="hole-cell" key={index}><div className="hole"><Mole active={activeHole === index} visible={activeHole === index || whackedHole === index} whacked={whackedHole === index} onHit={() => onHit(index)} /></div></div>)}
               </div>
 
-              {screen === 'start' && <div className="screen-overlay"><div className="overlay-card start-card"><div className="overlay-flower">✿</div><div className="overlay-kicker">A LITTLE DESK BREAK</div><h2>抓到你了！</h2><p>小鼠趁你工作時跑到桌上，<br />快來把牠們抓回去吧！</p><button className="primary-button" onClick={onStart}>開始遊戲 <span>→</span></button><div className="overlay-hint">點小鼠得分 · 點空桌扣分 · 三次失誤結束</div></div></div>}
-              {screen === 'ended' && <div className="screen-overlay"><div className="overlay-card result-card"><div className="overlay-flower">☕</div><div className="overlay-kicker">BREAK TIME IS OVER</div><h2>辛苦啦！</h2><p>小鼠已經回到牠的洞裡，<br />準備好再挑戰一次了嗎？</p><div className="result-score"><span>本局得分</span><strong>{score}</strong></div><button className="primary-button" onClick={onRestart}>再玩一次 <span>↻</span></button><div className="overlay-hint">本次失誤 {misses} 次</div></div></div>}
-              <div className="scene-caption"><span className="caption-dot" /> OFFICE 01 <span>・</span> 小鼠出沒中</div>
+              {screen === 'start' && <div className="screen-overlay"><div className="overlay-card start-card"><div className="overlay-flower">✿</div><h2>開始遊戲</h2><p>點中探頭的地鼠加 1 分；<br />點空桌扣 1 分，分數最低為 0。<br />失誤 3 次結束，自然縮回不算失誤。</p><button className="primary-button" onClick={onStart}>開始遊戲 <span>→</span></button></div></div>}
+              {screen === 'ended' && <div className="screen-overlay"><div className="overlay-card result-card"><div className="overlay-flower">☕</div><h2>遊戲結束</h2><p>本局得分</p><div className="result-score"><strong>{score}</strong></div><p>失誤次數：{misses} / {MAX_MISSES}</p><button className="primary-button" onClick={onRestart}>再玩一次 <span>↻</span></button></div></div>}
             </div>
             <div className="scene-shadow" />
-          <footer className="game-footer"><span>TAKE A BREATH, YOU’RE DOING GREAT.</span><span className="footer-stars">✦ ✧ ✦</span></footer>
         </div>
       </section>
-      <div className="page-footnote">MADE WITH A LITTLE BREAK <span>♡</span></div>
     </main>
   )
 }
